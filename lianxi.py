@@ -18,7 +18,7 @@ def print_specific_line(file_path, line_number):
 # 示例：打印第 3 行内容
 print_specific_line("filename.txt", 3)
 """
-
+"""
 def printfileline(filename,linenumber):
     try:
         with open(filename,"r") as file:
@@ -35,4 +35,20 @@ def printfileline(filename,linenumber):
     except FileNotFoundError:
         print(f"文件{filename}未找到")
 printfileline("filename.txt",9)
+"""
+# Please install OpenAI SDK first: `pip3 install openai`
 
+from openai import OpenAI
+
+client = OpenAI(api_key="sk-e5f06a6105b74f1699b887f913dcf711", base_url="https://api.deepseek.com")
+
+response = client.chat.completions.create(
+    model="deepseek-chat",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant"},
+        {"role": "user", "content": "Hello"},
+    ],
+    stream=False
+)
+
+print(response.choices[0].message.content)
